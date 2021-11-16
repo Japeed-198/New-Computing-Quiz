@@ -1,0 +1,3 @@
+([('Main',
+   '/Users/link/PycharmProjects/HarryPotterQuiz/dist/Main',
+   'EXECUTABLE')],)

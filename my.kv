@@ -1,0 +1,630 @@
+
+#include Global.py
+
+windowmanager:
+    id: "windowmanager"
+    MainMenu:
+    firstquestion:
+    secondquestion:
+    thirdquestion:
+    fourthquestion:
+    GryHuf:
+    GryRav:
+    GrySly:
+    HufGry:
+    HufSly:
+    HufRav:
+    Gry_house:
+    Sly_house:
+    Rav_house:
+    Huf_house:
+    deciding:
+
+
+
+<MainMenu>:
+    name: "Main"
+    id: "Main"
+    canvas:
+        Rectangle:
+            source:"Hogwarts.png"
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows:1
+
+
+        GridLayout:
+            rows:3
+
+            Title:
+                source: 'Title.png'
+                size: self.texture_size
+
+            StartButton:
+                source: "Start.png"
+                on_press:
+                    source: "Start2.png"
+                on_release:
+                    root.transition_effect()
+                    app.root.current = "First"
+
+            Widget:
+
+
+<firstquestion>:
+    name: "First"
+    id: "First"
+    canvas:
+        Rectangle:
+            source:"Hogwarts.png"
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows:1
+
+
+        GridLayout:
+            rows:9
+
+            Title:
+                source: 'Question1.png'
+                size: self.texture_size
+
+            Widget:
+
+            Widget:
+
+            Widget:
+
+            Widget:
+
+            Answer1:
+                source: "Answer1.png"
+                size: self.texture_size
+                on_release:
+                    root.add_one_huf()
+                    root.add_one_counter()
+                    root.transition_effect()
+                    app.root.current = "Second"
+
+            TheGreat:
+                source: "TheGreat.png"
+                size: self.texture_size
+                on_release:
+                    root.add_one_sly()
+                    root.add_one_counter()
+                    root.transition_effect()
+                    app.root.current = "Second"
+
+            TheWise:
+                source: "TheWise.png"
+                size: self.texture_size
+                on_release:
+                    root.add_one_rav()
+                    root.add_one_counter()
+                    root.transition_effect()
+                    app.root.current = "Second"
+
+            TheBold:
+                source: "TheBold.png"
+                size: self.texture_size
+                on_release:
+                    root.add_one_gry()
+                    root.add_one_counter()
+                    root.transition_effect()
+                    app.root.current = "Second"
+
+
+
+<secondquestion>:
+    name: "Second"
+    id: "Second"
+    canvas:
+        Rectangle:
+            source:"ques2bg.png"
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows:1
+
+
+        GridLayout:
+            rows:5
+
+            Title:
+                source: 'Question2.png'
+                size: self.texture_size
+
+
+            Widget:
+
+            Widget:
+
+            Dawn:
+                source: "Dawn.png"
+                on_release:
+                    root.add_one_gry()
+                    root.add_one_rav()
+                    root.add_one_counter()
+                    root.transition_effect()
+                    app.root.current = "Third"
+
+            Dusk:
+                source: "Dusk.png"
+                on_release:
+                    root.add_one_huf()
+                    root.add_one_sly()
+                    root.add_one_counter()
+                    root.transition_effect()
+                    app.root.current = "Third"
+
+<thirdquestion>:
+    name: "Third"
+    id: "Third"
+    canvas:
+        Rectangle:
+            source:"ques3.jpeg"
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows:1
+
+
+        GridLayout:
+            rows:9
+
+            Title:
+                source: 'Question3.png'
+                size: self.texture_size
+
+
+            Widget:
+
+            Widget:
+
+            Widget:
+
+            Widget:
+
+            Violin:
+                source: "Violin.png"
+                size: self.texture_size
+                on_release:
+                    root.add_one_sly()
+                    root.add_one_counter()
+                    root.transition_effect()
+                    app.root.current = "Fourth"
+
+            Trumpet:
+                source: "Trumpet.png"
+                size: self.texture_size
+                on_release:
+                    root.add_one_huf()
+                    root.add_one_counter()
+                    root.transition_effect()
+                    app.root.current = "Fourth"
+
+            Piano:
+                source: "Piano.png"
+                size: self.texture_size
+                on_release:
+                    root.add_one_rav()
+                    root.add_one_counter()
+                    root.transition_effect()
+                    app.root.current = "Fourth"
+
+            Drum:
+                source: "Drum.png"
+                size: self.texture_size
+                on_release:
+                    root.add_one_gry()
+                    root.add_one_counter()
+                    root.transition_effect()
+                    app.root.current = "Fourth"
+
+
+
+<fourthquestion>:
+    name: "Fourth"
+    id: "Fourth"
+    canvas:
+        Rectangle:
+            source:"ques4bg.jpg"
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows:1
+
+
+        GridLayout:
+            rows:9
+
+            Title:
+                source: 'Question4.png'
+                size: self.texture_size
+
+
+            Widget:
+
+            Widget:
+
+            Widget:
+
+            Widget:
+
+            Huf:
+                source: "Huf.png"
+                size: self.texture_size
+                on_release:
+                    root.add_one_huf()
+                    root.transition_effect()
+                    root.decide()
+
+
+            Sly:
+                source: "Sly.png"
+                size: self.texture_size
+                on_release:
+                    root.add_one_sly()
+                    root.transition_effect()
+                    root.decide()
+
+
+            Gry:
+                source: "Gry.png"
+                size: self.texture_size
+                on_release:
+                    root.add_one_gry()
+                    root.transition_effect()
+                    root.decide()
+
+
+            Rav:
+                source: "Rav.png"
+                size: self.texture_size
+                on_release:
+                    root.add_one_rav()
+                    root.transition_effect()
+                    root.decide()
+
+
+<GryHuf>:
+    name: "GryHuf"
+    id: "GryHuf"
+    canvas:
+        Rectangle:
+            source:"ques5bg.jpg"
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows:1
+
+
+        GridLayout:
+            rows:5
+
+            Title:
+                source: 'Question5.png'
+                size: self.texture_size
+
+
+            Widget:
+
+            Widget:
+
+            Left:
+                source: "Left.png"
+                on_press:
+                    root.add_one_gry()
+                    root.transition_effect()
+
+            Right:
+                source: "Right.png"
+                on_press:
+                    root.add_one_huf()
+                    root.transition_effect()
+
+<GryRav>:
+    name: "GryRav"
+    id: "GryRav"
+    canvas:
+        Rectangle:
+            source:"ques5bg.jpg"
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows:1
+
+
+        GridLayout:
+            rows:5
+
+            Title:
+                source: 'Question5.png'
+                size: self.texture_size
+
+
+            Widget:
+
+            Widget:
+
+            Left:
+                source: "Left.png"
+                on_press:
+                    root.add_one_gry()
+                    root.transition_effect()
+
+            Right:
+                source: "Right.png"
+                on_press:
+                    root.add_one_rav()
+                    root.transition_effect()
+
+<GrySly>:
+    name: "GrySly"
+    id: "GrySly"
+    canvas:
+        Rectangle:
+            source:"ques5bg.jpg"
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows:1
+
+
+        GridLayout:
+            rows:5
+
+            Title:
+                source: 'Question5.png'
+                size: self.texture_size
+
+
+            Widget:
+
+            Widget:
+
+            Left:
+                source: "Left.png"
+                on_press:
+                    root.add_one_gry()
+                    root.transition_effect()
+
+            Right:
+                source: "Right.png"
+                on_press:
+                    root.add_one_sly()
+                    root.transition_effect()
+
+<HufGry>:
+    name: "GryHuf"
+    id: "GryHuf"
+    canvas:
+        Rectangle:
+            source:"ques5bg.jpg"
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows:1
+
+
+        GridLayout:
+            rows:5
+
+            Title:
+                source: 'Question5.png'
+                size: self.texture_size
+
+
+            Widget:
+
+            Widget:
+
+            Left:
+                source: "Left.png"
+                on_press:
+                    root.add_one_gry()
+                    root.transition_effect()
+
+            Right:
+                source: "Right.png"
+                on_press:
+                    root.add_one_huf()
+                    root.transition_effect()
+
+<HufSly>:
+    name: "HufSly"
+    id: "HufSly"
+    canvas:
+        Rectangle:
+            source:"ques5bg.jpg"
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows:1
+
+
+        GridLayout:
+            rows:5
+
+            Title:
+                source: 'Question5.png'
+                size: self.texture_size
+
+
+            Widget:
+
+            Widget:
+
+            Left:
+                source: "Left.png"
+                on_press:
+                    root.add_one_huf()
+                    root.transition_effect()
+
+            Right:
+                source: "Right.png"
+                on_press:
+                    root.add_one_sly()
+                    root.transition_effect()
+
+<HufRav>:
+    name: "HufRav"
+    id: "HufRav"
+    canvas:
+        Rectangle:
+            source:"ques5bg.jpg"
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows:1
+
+
+        GridLayout:
+            rows:5
+
+            Title:
+                source: 'Question5.png'
+                size: self.texture_size
+
+
+            Widget:
+
+            Widget:
+
+            Left:
+                source: "Left.png"
+                on_press:
+                    root.add_one_huf()
+                    root.transition_effect()
+
+            Right:
+                source: "Right.png"
+                on_press:
+                    root.add_one_rav()
+                    root.transition_effect()
+
+
+<deciding>:
+    name: "Deciding"
+    id: "Deciding"
+    canvas:
+        Rectangle:
+            source: "Deciding.png"
+            pos: self.pos
+            size: self.size
+    GridLayout:
+        rows:1
+
+        GridLayout:
+            rows: 5
+
+            Click:
+                source: "Click.png"
+                size: self.texture_size
+
+            Widget:
+
+            TheButton:
+                source: 'BigButton.png'
+                size: self.texture_size
+                on_press:
+                    root.decider()
+
+
+
+<Gry_house>:
+    name: "Gry_house"
+    canvas:
+        Rectangle:
+            source: "Gryffindorbg.jpg"
+            pos: self.pos
+            size: self.size
+    GridLayout:
+        rows:1
+
+        GridLayout:
+            rows: 3
+
+            Image:
+                source: 'Grymotto.png'
+
+            Widget:
+
+            Label:
+                text: ""
+
+
+
+<Rav_house>:
+    name: "Rav_house"
+    canvas:
+        Rectangle:
+            source: "Ravenclawbg.jpg"
+            pos: self.pos
+            size: self.size
+    GridLayout:
+        rows:1
+
+        GridLayout:
+            rows: 3
+
+            Widget:
+
+            Widget:
+
+            Label:
+                text: ""
+
+<Huf_house>:
+    name: "Huf_house"
+    canvas:
+        Rectangle:
+            source: "Hufflepuffbg.jpg"
+            pos: self.pos
+            size: self.size
+    GridLayout:
+        rows:1
+
+        GridLayout:
+            rows: 3
+
+            Widget:
+
+            Widget:
+
+            Label:
+                text: ""
+
+<Sly_house>:
+    name: "Sly_house"
+    canvas:
+        Rectangle:
+            source: "Slytherinbg.jpg"
+            pos: self.pos
+            size: self.size
+    GridLayout:
+        rows:1
+
+        GridLayout:
+            rows: 3
+
+            Widget:
+
+            Widget:
+
+            Label:
+                text: ""
+
