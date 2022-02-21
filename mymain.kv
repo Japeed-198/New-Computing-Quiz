@@ -55,7 +55,12 @@ windowmanager:
         on_press:
             app.root.current = "Register"
 
-
+    MDRoundFlatButton:
+        id: Quit
+        pos_hint: {"center_x": 0.5, "center_y": 0.1}
+        text: "Quit"
+        on_press:
+            app.stop() 
 
 <Login_Screen>:
     name: "Login"
@@ -300,7 +305,6 @@ windowmanager:
 <firstquestion>:
     name: "First"
     id: "First"
-    on_pre_enter: root.chooser()
     canvas:
         Rectangle:
             source:"main_menu_bg.jpg"
@@ -372,7 +376,7 @@ windowmanager:
 <secondquestion>:
     name: "Second"
     id: "Second"
-    on_pre_enter: root.chooser()
+    
     canvas:
         Rectangle:
             source:"main_menu_bg.jpg"
@@ -1022,6 +1026,18 @@ windowmanager:
         padding_y: 15
 
     MDRoundFlatButton:
+        id: reset
+        text: "Play again?"
+        font_size: 30
+        halign: "center"
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        size_hint_y: None              
+        height: self.size[1]
+        padding_y: 50
+        on_press:
+            root.play_again()
+
+    MDRoundFlatButton:
         id: gotoleaderboard
         text: "Leaderboard"
         font_size: 30
@@ -1032,6 +1048,18 @@ windowmanager:
         padding_y: 50
         on_press:
             app.root.current = 'Leaderboard'
+
+    MDRoundFlatButton:
+        id: restart
+        text: "Main Menu"
+        font_size: 30
+        halign: "center"
+        pos_hint: {"center_x": 0.5, "center_y": 0.1}
+        size_hint_y: None              
+        height: self.size[1]
+        padding_y: 50
+        on_press:
+            app.root.current = 'Main'
 
 <leaderboard>:
     name: "Leaderboard"
@@ -1058,7 +1086,7 @@ windowmanager:
         text: "Second"
         font_size: 30
         halign: "center"
-        pos_hint: {"center_x": 0.5, "center_y": 0.7}
+        pos_hint: {"center_x": 0.5, "center_y": 0.8}
         size_hint_y: None
         height: self.texture_size[1]
         padding_y: 15
@@ -1068,7 +1096,7 @@ windowmanager:
         text: "Third"
         font_size: 30
         halign: "center"
-        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        pos_hint: {"center_x": 0.5, "center_y": 0.7}
         size_hint_y: None
         height: self.texture_size[1]
         padding_y: 15
@@ -1078,7 +1106,7 @@ windowmanager:
         text: "Fourth"
         font_size: 30
         halign: "center"
-        pos_hint: {"center_x": 0.5, "center_y": 0.3}
+        pos_hint: {"center_x": 0.5, "center_y": 0.6}
         size_hint_y: None
         height: self.texture_size[1]
         padding_y: 15
@@ -1088,9 +1116,21 @@ windowmanager:
         text: "Fifth"
         font_size: 30
         halign: "center"
-        pos_hint: {"center_x": 0.5, "center_y": 0.1}
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
         size_hint_y: None
         height: self.texture_size[1]
         padding_y: 15
+
+    MDRoundFlatButton:
+        id: Back
+        text: "Back"
+        font_size: 30
+        halign: "center"
+        pos_hint: {"center_x": 0.5, "center_y": 0.3}
+        size_hint_y: None              
+        height: self.size[1]
+        padding_y: 50
+        on_press:
+            app.root.current = 'Results'
 
 

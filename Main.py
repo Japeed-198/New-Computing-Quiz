@@ -25,20 +25,8 @@ pygame.mixer.music.play(-1)
 with open('users.csv', newline='') as userfile:
     reader = csv.reader(userfile)
 
-with open('question.csv', 'w', newline='') as questionfile:
-    writer2 = csv.writer(questionfile)
-    writer2.writerow(["Question", "Correct Answer", "Incorrect answer", "Incorrect answer 2", "Incorrect answer 3"])
-    writer2.writerow(["CPU Question1", "Clock Speed1", "Cache1", "Cores1", "RAM1"])
-    writer2.writerow(["CPU Question2", "Clock Speed2", "Cache2", "Cores2", "RAM2"])
-    writer2.writerow(["CPU Question3", "Clock Speed3", "Cache3", "Cores3", "RAM3"])
-    writer2.writerow(["CPU Question4", "Clock Speed4", "Cache4", "Cores4", "RAM4"])
-    writer2.writerow(["CPU Question5", "Clock Speed5", "Cache5", "Cores5", "RAM5"])
-    writer2.writerow(["CPU Question6", "Clock Speed6", "Cache6", "Cores6", "RAM6"])
-    writer2.writerow(["CPU Question7", "Clock Speed7", "Cache7", "Cores7", "RAM7"])
-    writer2.writerow(["CPU Question8", "Clock Speed8", "Cache8", "Cores8", "RAM8"])
-    writer2.writerow(["CPU Question9", "Clock Speed9", "Cache9", "Cores9", "RAM9"])
-    writer2.writerow(["CPU Question10", "Clock Speed10", "Cache10", "Cores10", "RAM10"])
-    writer2.writerow(["CPU Question11", "Clock Speed11", "Cache11", "Cores11", "RAM11"])
+with open('question.csv', newline='') as questionfile:
+    reader2 = csv.reader(questionfile)
     
 df = pd.read_csv('users.csv', sep=',')
 questiondf = pd.read_csv('question.csv', sep=',')
@@ -55,6 +43,7 @@ class Login_Screen(Screen):
     label = ObjectProperty(None)
     login_button = ObjectProperty(None)
     def login(self):
+        df = pd.read_csv('users.csv', sep=',')
         attempt_username = self.ids.user.text   
         attempt_password = self.ids.password.text
 
@@ -115,9 +104,11 @@ class mode(Screen):
     easy = ObjectProperty(None)
     hard = ObjectProperty(None)
     def easy_mode(self):
+        Global.score_counter = 0
         Global.normal_mode = True
         self.parent.current = 'First'
     def hard_mode(self):
+        Global.score_counter = 0
         Global.hard_mode = True
         self.parent.current = 'First'
 
@@ -128,7 +119,8 @@ class firstquestion(Screen):
     option_4 = ObjectProperty(None)
     question_1 = ObjectProperty(None)
     score_counter = ObjectProperty(None)
-    def on_pre_enter(self):
+    def on_enter(self):
+        Global.score_counter = 0
         print(Global.question_counter)
         self.chooser()
     
@@ -678,7 +670,7 @@ class results(Screen):
         pass
     def show_results(self):
         self.ids.playerscore.text = f'{Global.player_username} acheived the score of: {Global.score_counter}'
-        df.set_index('Username', inplace=True, drop=False)     
+        df.set_index('Username', inplace=True, drop=True)     
         df.loc[Global.player_username, 'Recent Score'] = Global.score_counter
         current_score = df.loc[Global.player_username, 'Recent Score']
         print(current_score)
@@ -694,7 +686,10 @@ class results(Screen):
         elif Global.score_counter <= 3:
             self.ids.congrats.text = f'Smh'
         df.reset_index(drop=True)
+        print(df)
         df.to_csv('users.csv')
+    def play_again(self):
+        self.parent.current = 'First'
 
 class leaderboard(Screen):
     first = ObjectProperty(None)
@@ -705,9 +700,13 @@ class leaderboard(Screen):
     def on_enter(self):
         pass
     def leaderboard_sorter(self):
-        df.sort_values(by=['High Score'], inplace=True)
-        self.ids.first.text = f'{df.loc[0, "Username"]}: {df.loc[0, "High Score"]}'
-        self.ids.second.text = f'{df.loc[1, "Username"]}: {df.loc[1, "High Score"]}'
+        new_df = pd.read_csv('users.csv', sep=',')
+        new_df.sort_values(by=['High Score'], inplace=True, ascending=False)
+        self.ids.first.text = f'{new_df.iloc[0]["Username"]}: {new_df.iloc[0]["High Score"]}'
+        self.ids.second.text = f'{new_df.iloc[1]["Username"]}: {new_df.iloc[1]["High Score"]}'
+        self.ids.third.text = f'{new_df.iloc[2]["Username"]}: {new_df.iloc[2]["High Score"]}'
+        self.ids.fourth.text = f'{new_df.iloc[3]["Username"]}: {new_df.iloc[3]["High Score"]}'
+        self.ids.fifth.text = f'{new_df.iloc[4]["Username"]}: {new_df.iloc[4]["High Score"]}'
  
 
 
