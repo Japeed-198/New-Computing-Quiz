@@ -69,7 +69,9 @@ class Login_Screen(Screen):
     def quiz_start(self, instance):
         self.parent.current = 'Mode'
     def clear(self):
-        pass
+        self.ids.label.text = f'Please Log in'
+        self.ids.user.text = f''
+        self.ids.password = f''
 
 class Register_Screen(Screen):
     register_user = ObjectProperty(None)
@@ -98,7 +100,9 @@ class Register_Screen(Screen):
     def go_login(self, instance):
         self.parent.current = 'Login'
     def clear(self):
-        pass
+        self.ids.label.text = f'Please enter your details'
+        self.ids.user.text = f''
+        self.ids.password = f''
 
 class mode(Screen):
     easy = ObjectProperty(None)
